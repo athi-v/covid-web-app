@@ -1,18 +1,13 @@
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button } from "@mui/material";
 
 function App() {
-
   return (
     <Box>
-      <Typography>
-
-     Test
-      </Typography>
       <Button variant="text" color="error">
-        drt
+        Test
       </Button>
     </Box>
-  )
+  );
 }
 
-export default App
+export default App;
