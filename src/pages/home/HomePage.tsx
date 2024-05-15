@@ -1,8 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import PageLayout from "../../layout/PageLayout";
 
 const HomePage = () => {
   return (
-    <Box>
+    <PageLayout>
       <Typography>
         We put science to work to build a healthier, safer world
       </Typography>
@@ -19,7 +20,7 @@ const HomePage = () => {
         confront the biggest health challenges of our time and measurably
         advance the well-being of the world’s people.
       </Typography>
-    </Box>
+    </PageLayout>
   );
 };
 

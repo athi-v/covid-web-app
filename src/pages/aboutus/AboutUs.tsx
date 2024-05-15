@@ -1,5 +1,7 @@
+import PageLayout from "../../layout/PageLayout";
+
 const AboutUs = () => {
-  return <div>AboutUs</div>;
+  return <PageLayout>AboutUs</PageLayout>;
 };
 
 export default AboutUs;
