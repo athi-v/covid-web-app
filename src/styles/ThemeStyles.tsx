@@ -30,8 +30,59 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "'Inter', sans-serif",
+    h1: {
+      fontWeight: 700,
+      fontSize: '30px',
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '20px',
+    },
+    h3: {
+      fontWeight: 500,
+      fontSize: '15px',
+    },
+    h4: {
+      fontWeight: 700,
+      fontSize: '14px',
+    },
+    h5: {
+      fontWeight: 300,
+      fontSize: '30px',
+    },
+    h6: {
+      fontWeight: 200,
+      fontSize: '30px',
+    },
+
   },
+
+  components: {
+    MuiInputBase: {
+        styleOverrides: {
+            root: {
+                borderRadius: '0px !important',
+            },
+        },
+    },
+
+    MuiButton: { 
+        styleOverrides: {
+            root: {
+                fontSize: '14px',
+                borderRadius: '20', 
+                fontWeight: '600',
+                height: "53px", 
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'start',
+                color: '#f5f5f5',
+            }
+        }
+    }
+
+},
 });
 
 export default theme;

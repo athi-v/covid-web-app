@@ -25,6 +25,7 @@ const DashboardNavbar = () => {
         justifyContent: "space-between",
         height: "100vh",
         p: "20px",
+        background: '#042f2e'
       }}
     >
       <Box
@@ -37,6 +38,9 @@ const DashboardNavbar = () => {
         {dashboardItem.map((item) => (
           <Box>
             <Button
+            fullWidth
+            variant="text"
+            disableElevation
               key={item.id}
               onClick={() => navigate(item.link)}
               sx={{
@@ -44,7 +48,10 @@ const DashboardNavbar = () => {
               }}
               startIcon={item.icon}
             >
+              <Typography variant="h4">
+
               {item.title}
+              </Typography>
             </Button>
           </Box>
         ))}
