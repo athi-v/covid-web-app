@@ -1,12 +1,21 @@
-import { Box, Button } from "@mui/material";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AboutUs from "./pages/aboutus/AboutUs";
+import HomePage from "./pages/home/HomePage";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Statistics from "./pages/dashboard/Statistics";
+import Diagnostics from "./pages/dashboard/Diagnostics";
 
 function App() {
   return (
-    <Box>
-      <Button variant="text" color="error">
-        Test
-      </Button>
-    </Box>
+    <Router>
+      <Routes>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/diagnostics" element={<Diagnostics />} />
+      </Routes>
+    </Router>
   );
 }
 
