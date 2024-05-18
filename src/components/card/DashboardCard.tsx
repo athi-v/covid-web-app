@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 interface DashboardCardProps {
     title: string;
-    value:  number;
+    value:  string;
     icon: ReactNode
 }
 const DashboardCard = ({title, value, icon}: DashboardCardProps) => {

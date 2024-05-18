@@ -20,7 +20,7 @@ const DashboardNavbar = () => {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: {xs: "none", lg:"flex"},
         flexDirection: "column",
         justifyContent: "space-between",
         height: "100vh",
