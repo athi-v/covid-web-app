@@ -1,7 +1,9 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import PageLayout from "../../layout/PageLayout";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate()
   return (
     <PageLayout>
       <Typography>
@@ -20,6 +22,9 @@ const HomePage = () => {
         confront the biggest health challenges of our time and measurably
         advance the well-being of the world’s people.
       </Typography>
+      <Button variant="contained" onClick={() => navigate('/')}>
+        Dashboad
+      </Button>
     </PageLayout>
   );
 };

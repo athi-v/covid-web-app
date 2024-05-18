@@ -82,7 +82,7 @@ const Dashboard = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid item lg={12} mt={5} px={"0"}>
+          <Grid item lg={12} mt={5} >
             <SimpleLineChart data={covidHstoryData}/>
           </Grid>
         </>
