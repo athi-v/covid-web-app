@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 }
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <Container maxWidth="xl" disableGutters>
+    <Container maxWidth={false} disableGutters>
       <CssBaseline />
       <Grid container >
         <Grid item lg={2}>
