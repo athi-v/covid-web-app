@@ -69,11 +69,11 @@ const Dashboard = () => {
       {(isWorldwideSucces || isHistorySuccess) && (
         <>
           <Grid container spacing={4}>
-            <Grid item lg={12}>
+            <Grid item xs={12}>
               <Typography variant="h1">Welcome Guest,</Typography>
             </Grid>
             {overallData.map((item) => (
-              <Grid item lg={6}>
+              <Grid item xs={12} lg={6}>
                 <DashboardCard
                   title={item.title}
                   value={formatNumber(item?.total)?.toString() || "0"}
