@@ -10,7 +10,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import { visuallyHidden } from '@mui/utils';
@@ -23,27 +22,7 @@ interface Data {
     deaths: number;
 }
 
-// function createData(
-//   id: number,
-//   country: string,
-//   recovered: number,
-//   cases: number,
-//   deaths: number,
-// ): Data {
-//   return {
-//     id,
-//     country,
-//     recovered,
-//     cases,
-//     deaths,
-//   };
-// }
 
-// const rows = [
-//   // createData({id, country, recovered, cases, deaths}: Data)
-//   createData(id, country, 305, 3.7, 67),
-//   // createData(1, 'Afg', 2, 3.7, 67),
-// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -204,14 +183,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
                 }),
             }}
         >
-            <Typography
-                sx={{ flex: '1 1 100%' }}
-                variant='h6'
-                id='tableTitle'
-                component='div'
-            >
-                Countries
-            </Typography>
+
 
             {numSelected > 0 ? (
                 <Tooltip title='Delete'>
@@ -256,25 +228,6 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
         setSelected([]);
     };
 
-    const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected: readonly number[] = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            );
-        }
-        setSelected(newSelected);
-    };
-
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
@@ -304,12 +257,12 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage
             ),
-        [order, orderBy, page, rowsPerPage]
+        [order, orderBy, page, rowsPerPage, data]
     );
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
+            <Paper sx={{ width: '100%', mb: 2,  }} elevation={0}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <Table
@@ -334,9 +287,9 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                                 return (
                                     <TableRow
                                         hover
-                                        onClick={(event) =>
-                                            handleClick(event, row.id)
-                                        }
+                                        // onClick={(event) =>
+                                        //     handleClick(event, row.id)
+                                        // }
                                         // role="checkbox"
                                         // aria-checked={isItemSelected}
                                         tabIndex={-1}

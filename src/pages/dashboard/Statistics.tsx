@@ -4,6 +4,7 @@ import EnhancedTable from '../../components/table/EnhancedTable';
 import DashboardLayout from '../../layout/DashboardLayout';
 import Loading from '../../components/loader/Loading';
 import Error from '../../components/error/Error';
+import { Typography } from '@mui/material';
 
 interface CovidCountryData {
     country: string;
@@ -50,7 +51,18 @@ const Statistics = () => {
             {isLoading && <Loading />}
 
             {isError && <Error />}
-            {isSuccess && <EnhancedTable data={formattedData} />}
+            {isSuccess && 
+            <>
+            <Typography sx={{
+                fontSize: '40px'
+            }}>
+                Statistics
+            </Typography>
+            
+            <EnhancedTable data={formattedData} />
+            </>
+
+            }
         </DashboardLayout>
     );
 };
