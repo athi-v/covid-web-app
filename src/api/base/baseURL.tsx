@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
-const covidBaseURL = "https://disease.sh/v3/covid-19/";
+const covidBaseURL = 'https://disease.sh/v3/covid-19/';
 
 export const baseURL = axios.create({
-  baseURL: covidBaseURL,
+    baseURL: covidBaseURL,
 });

@@ -1,9 +1,58 @@
-import DashboardLayout from '../../layout/DashboardLayout'
+import { useQuery } from '@tanstack/react-query';
+import { apiCountries } from '../../api/covidAPI';
+import EnhancedTable from '../../components/table/EnhancedTable';
+import DashboardLayout from '../../layout/DashboardLayout';
+import Loading from '../../components/loader/Loading';
+import Error from '../../components/error/Error';
 
-const Statistics = () => {
-  return (
-    <DashboardLayout>Statistics</DashboardLayout>
-  )
+interface CovidCountryData {
+    country: string;
+    recovered: number;
+    cases: number;
+    deaths: number;
 }
 
-export default Statistics
+const Statistics = () => {
+    const {
+        data: covidCountriesData,
+        isSuccess,
+        isLoading,
+        isError,
+    } = useQuery({ queryKey: ['covidCountryData'], queryFn: apiCountries });
+
+    const createData = (
+        id: number,
+        country: string,
+        recovered: number,
+        cases: number,
+        deaths: number
+    ) => ({
+        id,
+        country,
+        recovered,
+        cases,
+        deaths,
+    });
+
+    const formattedData = covidCountriesData?.map(
+        (item: CovidCountryData, index: number) =>
+            createData(
+                index,
+                item.country,
+                item.recovered,
+                item.cases,
+                item.deaths
+            )
+    );
+
+    return (
+        <DashboardLayout>
+            {isLoading && <Loading />}
+
+            {isError && <Error />}
+            {isSuccess && <EnhancedTable data={formattedData} />}
+        </DashboardLayout>
+    );
+};
+
+export default Statistics;
