@@ -209,7 +209,7 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const handleRequestSort = (
-        event: React.MouseEvent<unknown>,
+        _event: React.MouseEvent<unknown>,
         property: keyof Data
     ) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -228,7 +228,7 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
         setSelected([]);
     };
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
     };
 
