@@ -23,9 +23,10 @@ const DashboardNavbar = () => {
         display: { xs: "none", lg: "flex" },
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "100vh",
         p: "20px",
+        height: "100%",
         background: "#042f2e",
+        position: 'fixed'
       }}
     >
       <Box

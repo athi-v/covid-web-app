@@ -12,56 +12,38 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-// import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Switch from '@mui/material/Switch';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
 interface Data {
   id: number;
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
+  country: string;
+  recovered: number;
+  cases: number;
+  deaths: number;
 }
 
-function createData(
-  id: number,
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-): Data {
-  return {
-    id,
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
+// function createData(
+//   id: number,
+//   country: string,
+//   recovered: number,
+//   cases: number,
+//   deaths: number,
+// ): Data {
+//   return {
+//     id,
+//     country,
+//     recovered,
+//     cases,
+//     deaths,
+//   };
+// }
 
-const rows = [
-  createData(1, 'Cupcake', 305, 3.7, 67, 4.3),
-  createData(2, 'Donut', 452, 25.0, 51, 4.9),
-  createData(3, 'Eclair', 262, 16.0, 24, 6.0),
-  createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData(5, 'Gingerbread', 356, 16.0, 49, 3.9),
-  createData(6, 'Honeycomb', 408, 3.2, 87, 6.5),
-  createData(7, 'Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData(8, 'Jelly Bean', 375, 0.0, 94, 0.0),
-  createData(9, 'KitKat', 518, 26.0, 65, 7.0),
-  createData(10, 'Lollipop', 392, 0.2, 98, 0.0),
-  createData(11, 'Marshmallow', 318, 0, 81, 2.0),
-  createData(12, 'Nougat', 360, 19.0, 9, 37.0),
-  createData(13, 'Oreo', 437, 18.0, 63, 4.0),
-];
+// const rows = [
+//   // createData({id, country, recovered, cases, deaths}: Data)
+//   createData(id, country, 305, 3.7, 67),
+//   // createData(1, 'Afg', 2, 3.7, 67),
+// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -87,10 +69,6 @@ function getComparator<Key extends keyof Data>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort<T>(array: readonly T[], comparator: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
@@ -112,44 +90,40 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'name',
+    id: 'country',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'Countries',
   },
   {
-    id: 'calories',
+    id: 'recovered',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'Recovered',
   },
   {
-    id: 'fat',
+    id: 'cases',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'Cases',
   },
   {
-    id: 'carbs',
+    id: 'deaths',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'Deaths',
   },
-  {
-    id: 'protein',
-    numeric: true,
-    disablePadding: false,
-    label: 'Protein (g)',
-  },
+
 ];
 
 interface EnhancedTableProps {
-  numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  order: Order;
-  orderBy: string;
-  rowCount: number;
+  data: Data[] | undefined;
+  numSelected?: number;
+  onRequestSort?: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onSelectAllClick?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  order?: Order;
+  orderBy?: string;
+  rowCount?: number;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
@@ -157,8 +131,10 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     props;
   const createSortHandler =
     (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property);
-    };
+      if (onRequestSort) {
+        onRequestSort(event, property);
+      }
+        };
 
   return (
     <TableHead>
@@ -247,9 +223,9 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     </Toolbar>
   );
 }
-export default function EnhancedTable() {
+export default function EnhancedTable({data}: EnhancedTableProps) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('recovered');
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
 //   const [dense, setDense] = React.useState(false);
@@ -266,8 +242,8 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
-      setSelected(newSelected);
+      const newSelected = data?.map((n) => n.id);
+      setSelected(newSelected || []);
       return;
     }
     setSelected([]);
@@ -309,11 +285,11 @@ export default function EnhancedTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 && data ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(data || [], getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage,
       ),
@@ -331,12 +307,13 @@ export default function EnhancedTable() {
             // size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
+            data={data}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={data?.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -370,12 +347,11 @@ export default function EnhancedTable() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.country}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="right">{row.recovered}</TableCell>
+                    <TableCell align="right">{row.cases}</TableCell>
+                    <TableCell align="right">{row.deaths}</TableCell>
                   </TableRow>
                 );
               })}
@@ -394,7 +370,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={Number(data?.length)}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
