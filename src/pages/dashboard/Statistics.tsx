@@ -1,8 +1,12 @@
+import EnhancedTable from '../../components/table/EnhancedTable'
 import DashboardLayout from '../../layout/DashboardLayout'
 
 const Statistics = () => {
   return (
-    <DashboardLayout>Statistics</DashboardLayout>
+    <DashboardLayout>
+      <EnhancedTable />
+
+    </DashboardLayout>
   )
 }
 

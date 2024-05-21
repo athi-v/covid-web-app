@@ -1,18 +1,19 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import DashboardCard from "../../components/card/DashboardCard";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaHeart, FaPrayingHands } from "react-icons/fa";
 import { TbTestPipe } from "react-icons/tb";
-import SimpleLineChart from "../../components/graphs/SimpleLineChart";
 import { useQuery } from "@tanstack/react-query";
 import { apiHistory, apiWorldwide } from "../../api/covidAPI";
 import Loading from "../../components/loader/Loading";
 import Error from "../../components/error/Error";
 import { formatNumber } from "../../components/utils/formatNumber";
+import { useNavigate } from "react-router-dom";
+import Poster from '../../assets/poster/covid_poster.jpg'
 
 const Dashboard = () => {
-
+  const navigate = useNavigate()
   const {
     data: covidData,
     isSuccess: isWorldwideSucces,
@@ -70,7 +71,34 @@ const Dashboard = () => {
         <>
           <Grid container spacing={4}>
             <Grid item xs={12}>
-              <Typography variant="h1">Welcome Guest,</Typography>
+              <Box sx={{
+                height: '50vh',
+                position: 'relative'
+              }}>
+
+              <img src={Poster} alt="covid poster" 
+              style={{
+                objectFit: 'cover',
+                height:  '100%',
+                width: '100%',
+                borderRadius: '15px'
+              }}
+
+              />
+              <Box sx={{
+                position: 'absolute',
+                bottom: '0px',
+                p: '14px'
+              }}>
+
+                            <Button disableElevation variant="contained" sx={{
+                              textTransform: 'capitalize'
+                            }}
+                            onClick={() => navigate('/statistics')}
+                            >
+              View Statistics</Button>
+              </Box>
+              </Box>
             </Grid>
             {overallData.map((item) => (
               <Grid item xs={12} lg={6}>
@@ -83,7 +111,6 @@ const Dashboard = () => {
             ))}
           </Grid>
           <Grid item lg={12} mt={5} >
-            <SimpleLineChart data={covidHstoryData}/>
           </Grid>
         </>
       )}

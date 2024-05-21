@@ -8,7 +8,7 @@ interface PageLayoutProps {
 }
 const PageLayout = ({ children }: PageLayoutProps) => {
   return (
-    <Container>
+    <Container maxWidth={false}>
       <Navbar />
       {children}
       <Footer />

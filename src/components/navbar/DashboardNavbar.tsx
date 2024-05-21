@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
-import { BiTestTube } from "react-icons/bi";
-import { MdAnalytics } from "react-icons/md";
+import {BiTestTube } from "react-icons/bi";
+import { MdAnalytics, MdLogout } from "react-icons/md";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
@@ -56,6 +56,7 @@ const DashboardNavbar = () => {
       <Box>
         <Box
           sx={{
+            color: '#FFF',
             display: "flex",
             flexDirection: "row",
             justifyContent: "start",
@@ -68,7 +69,14 @@ const DashboardNavbar = () => {
           </Box>
           <Box>
             <Typography>Guest</Typography>
-          </Box>
+          </Box>          <Button sx={{
+                        display: 'flex',
+
+          }}
+          onClick={() => navigate('/')}
+          >
+<MdLogout />
+          </Button>
         </Box>
       </Box>
     </Box>

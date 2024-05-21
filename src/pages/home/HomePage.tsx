@@ -22,7 +22,7 @@ const HomePage = () => {
         confront the biggest health challenges of our time and measurably
         advance the well-being of the world’s people.
       </Typography>
-      <Button variant="contained" onClick={() => navigate('/')}>
+      <Button disableElevation variant="contained" onClick={() => navigate('/dashboard')}>
         Dashboad
       </Button>
     </PageLayout>
