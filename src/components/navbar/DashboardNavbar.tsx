@@ -1,5 +1,4 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
-import {BiTestTube } from "react-icons/bi";
 import { MdAnalytics, MdLogout } from "react-icons/md";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ const dashboardItem = [
     icon: <RiDashboardHorizontalFill />,
   },
   { id: "1", title: "Statistics", link: "/statistics", icon: <MdAnalytics /> },
-  { id: "3", title: "Covid Test", link: "/diagnostics", icon: <BiTestTube /> },
 ];
 
 const DashboardNavbar = () => {

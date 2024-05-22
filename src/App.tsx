@@ -4,6 +4,7 @@ import HomePage from './pages/home/HomePage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Statistics from './pages/dashboard/Statistics';
 import Diagnostics from './pages/dashboard/Diagnostics';
+import CountryDetails from './pages/dashboard/CountryDetails';
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/statistics' element={<Statistics />} />
                 <Route path='/diagnostics' element={<Diagnostics />} />
+                <Route
+                    path='/statistics/:country_id'
+                    element={<CountryDetails />}
+                />
             </Routes>
         </Router>
     );
