@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import { visuallyHidden } from '@mui/utils';
+import { useNavigate } from 'react-router-dom';
 
 interface Data {
     id: number;
@@ -21,8 +22,6 @@ interface Data {
     cases: number;
     deaths: number;
 }
-
-
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -183,8 +182,6 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
                 }),
             }}
         >
-
-
             {numSelected > 0 ? (
                 <Tooltip title='Delete'>
                     <></>
@@ -201,6 +198,8 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     );
 }
 export default function EnhancedTable({ data }: EnhancedTableProps) {
+    const navigate = useNavigate();
+
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('recovered');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
@@ -262,7 +261,7 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2,  }} elevation={0}>
+            <Paper sx={{ width: '100%', mb: 2 }} elevation={0}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <Table
@@ -296,15 +295,13 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                                         key={row.id}
                                         // selected={isItemSelected}
                                         sx={{ cursor: 'pointer' }}
+                                        onClick={() =>
+                                            navigate(
+                                                `/statistics/${row.country}`
+                                            )
+                                        }
                                     >
                                         <TableCell padding='checkbox'>
-                                            {/* <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
-                        }}
-                      /> */}
                                             <></>
                                         </TableCell>
                                         <TableCell
