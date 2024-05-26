@@ -13,7 +13,7 @@ const DashboardCard = ({title, value, icon}: DashboardCardProps) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
 
     }}>
         <Box sx={{
@@ -26,7 +26,7 @@ const DashboardCard = ({title, value, icon}: DashboardCardProps) => {
 </Box>
     <Box sx={{
     }}>
-        <Typography variant="h2">
+        <Typography variant="h3">
             {title}
         </Typography>
     </Box>

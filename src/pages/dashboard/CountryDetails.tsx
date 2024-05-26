@@ -97,7 +97,7 @@ const CountryDetails = () => {
                     <Box
                         mt={10}
                         sx={{
-                            display: 'flex',
+                            display: {xs: 'none', lg: 'flex'},
                             justifyContent: 'center',
                         }}
                     >

@@ -22,7 +22,7 @@ const theme = createTheme({
       main: "#17a2b8",
     },
     background: {
-      default: "#f8f9fa",
+      default: "#f5f5f5",
       paper: "#fff",
     },
     text: {
@@ -33,23 +33,23 @@ const theme = createTheme({
   typography: {
     fontFamily: "'Manrope', sans-serif",
     h1: {
-      fontWeight: 600,
+      fontWeight: 700,
       fontSize: '52px',
       fontFamily: "'Darker Grotesque', sans-serif"
     },
     h2: {
-      fontWeight: 600,
+      fontWeight: 800,
       fontSize: '20px',
       fontFamily: "'Darker Grotesque', sans-serif"
     },
     h3: {
-      fontWeight: 500,
-      fontSize: '15px',
+      fontWeight: 600,
+      fontSize: '18px',
       fontFamily: "'Darker Grotesque', sans-serif"
     },
     h4: {
-      fontWeight: 700,
-      fontSize: '14px',
+      fontWeight: 600,
+      fontSize: '20px',
       fontFamily: "'Darker Grotesque', sans-serif"
     },
     h5: {
@@ -84,7 +84,6 @@ const theme = createTheme({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'start',
-                color: '#f5f5f5',
             }
         }
     }

@@ -53,9 +53,7 @@ const Statistics = () => {
             {isError && <Error />}
             {isSuccess && 
             <>
-            <Typography sx={{
-                fontSize: '40px'
-            }}>
+            <Typography variant='h1' mb={10}>
                 Statistics
             </Typography>
             

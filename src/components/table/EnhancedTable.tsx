@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import { visuallyHidden } from '@mui/utils';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 
 interface Data {
     id: number;
@@ -111,6 +112,7 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps) {
     const { order, orderBy, onRequestSort } = props;
+    const isMobile = useMediaQuery('(max-width:600px)');
     const createSortHandler =
         (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
             if (onRequestSort) {
@@ -122,41 +124,31 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         <TableHead>
             <TableRow>
                 <TableCell padding='checkbox'>
-                    {/* <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          /> */}
                     <></>
                 </TableCell>
                 {headCells.map((headCell) => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
-                        padding={headCell.disablePadding ? 'none' : 'normal'}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                        >
-                            {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <Box component='span' sx={visuallyHidden}>
-                                    {order === 'desc'
-                                        ? 'sorted descending'
-                                        : 'sorted ascending'}
-                                </Box>
-                            ) : null}
-                        </TableSortLabel>
-                    </TableCell>
-                ))}
-            </TableRow>
+                       !isMobile || (headCell.id !== 'recovered' && headCell.id !== 'cases' && headCell.id !== 'deaths') ? (
+                           <TableCell
+                               key={headCell.id}
+                               align={headCell.numeric ? 'right' : 'left'}
+                               padding={headCell.disablePadding ? 'none' : 'normal'}
+                               sortDirection={orderBy === headCell.id ? order : false}
+                           >
+                               <TableSortLabel
+                                   active={orderBy === headCell.id}
+                                   direction={orderBy === headCell.id ? order : 'asc'}
+                                   onClick={createSortHandler(headCell.id)}
+                               >
+                                   {headCell.label}
+                                   {orderBy === headCell.id ? (
+                                       <Box component='span' sx={visuallyHidden}>
+                                           {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                       </Box>
+                                   ) : null}
+                               </TableSortLabel>
+                           </TableCell>
+                       ) : null
+                   ))}            </TableRow>
         </TableHead>
     );
 }
@@ -185,9 +177,6 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
             {numSelected > 0 ? (
                 <Tooltip title='Delete'>
                     <></>
-                    {/* <IconButton>
-            <DeleteIcon />
-          </IconButton> */}
                 </Tooltip>
             ) : (
                 <Tooltip title='Filter list'>
@@ -204,7 +193,6 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
     const [orderBy, setOrderBy] = React.useState<keyof Data>('recovered');
     const [selected, setSelected] = React.useState<readonly number[]>([]);
     const [page, setPage] = React.useState(0);
-    //   const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const handleRequestSort = (
@@ -238,13 +226,6 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
         setPage(0);
     };
 
-    //   const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     setDense(event.target.checked);
-    //   };
-
-    //   const isSelected = (id: number) => selected.indexOf(id) !== -1;
-
-    // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 && data
             ? Math.max(0, (1 + page) * rowsPerPage - data.length)
@@ -258,18 +239,19 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
             ),
         [order, orderBy, page, rowsPerPage, data]
     );
-
+    const isMobile = useMediaQuery('(max-width:600px)');
+    
     return (
         <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }} elevation={0}>
+            <Paper sx={{ width: '100%', mb: 2, borderRadius: '0' }} elevation={0}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
-                    <Table
-                        sx={{ minWidth: 750 }}
+                     <Table
+                        sx={{ minWidth: {xs: 100, lg: 750} }}
                         aria-labelledby='tableTitle'
-                        // size={dense ? 'small' : 'medium'}
                     >
                         <EnhancedTableHead
+
                             data={data}
                             numSelected={selected.length}
                             order={order}
@@ -280,20 +262,12 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                         />
                         <TableBody>
                             {visibleRows.map((row, index) => {
-                                // const isItemSelected = isSelected(row.id);
                                 const labelId = `enhanced-table-checkbox-${index}`;
-
                                 return (
                                     <TableRow
                                         hover
-                                        // onClick={(event) =>
-                                        //     handleClick(event, row.id)
-                                        // }
-                                        // role="checkbox"
-                                        // aria-checked={isItemSelected}
                                         tabIndex={-1}
                                         key={row.id}
-                                        // selected={isItemSelected}
                                         sx={{ cursor: 'pointer' }}
                                         onClick={() =>
                                             navigate(
@@ -312,7 +286,9 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                                         >
                                             {row.country}
                                         </TableCell>
-                                        <TableCell align='right'>
+                                        {!isMobile &&
+                                        <>                                       
+                                         <TableCell align='right'>
                                             {row.recovered}
                                         </TableCell>
                                         <TableCell align='right'>
@@ -321,14 +297,14 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                                         <TableCell align='right'>
                                             {row.deaths}
                                         </TableCell>
+                                        </>
+
+                            }
                                     </TableRow>
                                 );
                             })}
                             {emptyRows > 0 && (
                                 <TableRow
-                                //   style={{
-                                //     height: (dense ? 33 : 53) * emptyRows,
-                                //   }}
                                 >
                                     <TableCell colSpan={6} />
                                 </TableRow>
@@ -346,10 +322,6 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-            {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
         </Box>
     );
 }
