@@ -2,6 +2,7 @@ import {Button, Grid, Typography } from '@mui/material';
 import PageLayout from '../../layout/PageLayout';
 import { useNavigate } from 'react-router-dom';
 import CovidHome from '../../assets/poster/distance.svg'
+import { KeyboardArrowRight } from '@mui/icons-material';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -13,16 +14,16 @@ const HomePage = () => {
 >
                 <Grid item lg={6} >
 
-            <Typography variant='h1'>
-                We put science to work to build <br />a healthier, safer worldg
+            <Typography variant='h1' mb={5}>
+                We put science to work to build <br />a healthier, safer world
             </Typography>
-            <Typography fontWeight={400}>
+            <Typography fontWeight={400} mb={4}>
                 ByteData leads and champions global efforts to achieve better
                 health for all. By connecting countries, people and partners, we
                 strive to give everyone, everywhere an equal chance at a safe
                 and healthy life.
             </Typography>
-            <Typography fontWeight={400}>
+            <Typography fontWeight={400} >
                 From emerging epidemics such as COVID-19 to the persistent
                 threat of communicable diseases including HIV, malaria and
                 tuberculosis and chronic diseases such as diabetes, heart
@@ -32,14 +33,17 @@ const HomePage = () => {
                 the world’s people.
             </Typography>
             <Button
-                variant='contained'
+            size='small'
+                variant='text'
                 sx={{
+                    mt: 10,
                     textTransform: 'capitalize',
                 }}
                 disableElevation
                 onClick={() => navigate('/dashboard')}
+                endIcon={<KeyboardArrowRight />}
             >
-                Dashboard
+                Continue as Guest
             </Button>
                 </Grid>
                 <Grid item lg={6}>

@@ -10,14 +10,14 @@ const Navbar = () => {
   }}>
 
   <Box>
-    Covid
+    {/* Covid */}
   </Box>
   <Box>
-    <Button variant="contained" sx={{
+    {/* <Button variant="contained" sx={{
       textTransform: 'capitalize'
     }}>
     Login
-    </Button>
+    </Button> */}
   </Box>
   </Box>;
 };
