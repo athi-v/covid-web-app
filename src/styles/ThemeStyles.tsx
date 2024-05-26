@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import '../styles/App.css'
 
 const theme = createTheme({
   palette: {
@@ -30,30 +31,36 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "'Manrope', sans-serif",
     h1: {
-      fontWeight: 700,
-      fontSize: '30px',
+      fontWeight: 600,
+      fontSize: '52px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
     h2: {
       fontWeight: 600,
       fontSize: '20px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
     h3: {
       fontWeight: 500,
       fontSize: '15px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
     h4: {
       fontWeight: 700,
       fontSize: '14px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
     h5: {
       fontWeight: 300,
       fontSize: '30px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
     h6: {
       fontWeight: 200,
       fontSize: '30px',
+      fontFamily: "'Darker Grotesque', sans-serif"
     },
 
   },
