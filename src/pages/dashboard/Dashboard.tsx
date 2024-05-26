@@ -5,7 +5,7 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaHeart, FaPrayingHands } from "react-icons/fa";
 import { TbTestPipe } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
-import { apiHistory, apiWorldwide } from "../../api/covidAPI";
+import {apiWorldwide } from "../../api/covidAPI";
 import Loading from "../../components/loader/Loading";
 import Error from "../../components/error/Error";
 import { formatNumber } from "../../components/utils/formatNumber";
@@ -20,20 +20,6 @@ const Dashboard = () => {
     isLoading: isWorldwideLoading,
     isError: isWorldwideError,
   } = useQuery({ queryKey: ["covidData"], queryFn: apiWorldwide });
-
-
-  const {
-    data: covidHstoryData,
-    isSuccess: isHistorySuccess,
-    isLoading: isHistoryLoading,
-    isError: isHistoryError,
-  } = useQuery({ queryKey: ["covidHistoryData"], queryFn: apiHistory });
-
-
-  console.log(covidHstoryData)
-  console.log(isHistorySuccess)
-  console.log(isHistoryLoading)
-  console.log(isHistoryError)
 
 
   const overallData = [
@@ -64,13 +50,15 @@ const Dashboard = () => {
   ];
   return (
     <DashboardLayout>
-      {(isWorldwideLoading || isHistoryLoading) && <Loading />}
-      {(isWorldwideError || isHistoryError )&& <Error />}
+      {isWorldwideLoading && <Loading />}
+      {isWorldwideError && <Error />}
 
-      {(isWorldwideSucces || isHistorySuccess) && (
+      {isWorldwideSucces  && (
         <>
           <Grid container spacing={4}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{
+              display: {xs: 'none', lg: 'block'}
+            }}>
               <Box sx={{
                 height: '50vh',
                 position: 'relative'

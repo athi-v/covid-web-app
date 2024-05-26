@@ -1,5 +1,4 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import { BiTestTube } from "react-icons/bi";
 import { MdAnalytics } from "react-icons/md";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ const dashboardItem = [
     icon: <RiDashboardHorizontalFill />,
   },
   { id: "1", title: "Statistics", link: "/statistics", icon: <MdAnalytics /> },
-  { id: "3", title: "Covid Test", link: "/diagnostics", icon: <BiTestTube /> },
 ];
 
 const MobileBottomNavbar = () => {
@@ -31,6 +29,9 @@ const MobileBottomNavbar = () => {
       <BottomNavigation showLabels>
         {dashboardItem.map((item) => (
           <BottomNavigationAction
+          sx={{
+            fontWeight: '700'
+          }}
             key={item.id}
             label={item.title}
             icon={item.icon}
