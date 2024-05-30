@@ -5,13 +5,17 @@ const Loading = () => {
         <Box
             sx={{
                 height: '100vh',
+                width: {xs: '100vw', lg: '100%'},
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
             }}
         >
+            <Box>
+
             <CircularProgress />
+            </Box>
         </Box>
     );
 };
