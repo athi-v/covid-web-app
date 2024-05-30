@@ -7,11 +7,7 @@ interface PageLayoutProps {
 }
 const PageLayout = ({ children }: PageLayoutProps) => {
     return (
-        <Container maxWidth={false} sx={{
-            // background: '#0B1215',
-            // color: '#FFF',
-            height: '100vh'
-        }}>
+        <Container maxWidth={false}  disableGutters>
             <CssBaseline />
             <Navbar />
             {children}
