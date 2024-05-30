@@ -247,7 +247,8 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                      <Table
-                        sx={{ minWidth: {xs: 100, lg: 750} }}
+                        sx={{ minWidth: {xs: '100%', lg: 750}, 
+                    minHeight: {xs: '50vh', lg: 'auto'} }}
                         aria-labelledby='tableTitle'
                     >
                         <EnhancedTableHead
