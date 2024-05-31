@@ -36,7 +36,7 @@ const Dashboard = () => {
         },
         {
             id: '1',
-            title: 'Positive Case',
+            title: 'Positive Cases',
             total: Number(covidData?.cases),
             icon: <AiOutlineUsergroupAdd size={'25'} />,
         },
