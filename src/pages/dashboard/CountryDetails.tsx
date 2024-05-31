@@ -41,7 +41,7 @@ const CountryDetails = () => {
         },
         {
             id: '1',
-            title: 'Positive Case',
+            title: 'Positive Cases',
             total: Number(covidCountriesDetails?.cases),
             icon: <AiOutlineUsergroupAdd size={'25'} />,
         },
