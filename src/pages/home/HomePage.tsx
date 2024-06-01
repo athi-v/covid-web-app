@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import PageLayout from '../../layout/PageLayout';
 import { useNavigate } from 'react-router-dom';
-import { KeyboardArrowRight } from '@mui/icons-material';
+// import { KeyboardArrowRight } from '@mui/icons-material';
 import { FcGoogle } from 'react-icons/fc';
 import { UserAuth } from '../../context/AuthContext';
 import { useEffect } from 'react';
@@ -72,7 +72,7 @@ const HomePage = () => {
                             mt: { xs: 5, lg: 10 },
                         }}
                     >
-                        <Button
+                        {/* <Button
                             size='small'
                             variant='contained'
                             sx={{
@@ -89,7 +89,7 @@ const HomePage = () => {
                             endIcon={<KeyboardArrowRight />}
                         >
                             Continue as Guest
-                        </Button>
+                        </Button> */}
                         <Button
                             size='small'
                             variant='outlined'
