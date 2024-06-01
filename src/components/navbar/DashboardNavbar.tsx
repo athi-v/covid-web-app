@@ -2,6 +2,7 @@ import { Avatar, Box, Button } from '@mui/material';
 import { MdAnalytics, MdLogout } from 'react-icons/md';
 import { RiDashboardHorizontalFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext';
 
 const dashboardItem = [
     {
@@ -20,6 +21,17 @@ const dashboardItem = [
 
 const DashboardNavbar = () => {
     const navigate = useNavigate();
+    const { logOut, user } = UserAuth() ?? {};
+
+    const handleLogout = async () => {
+        if (logOut) {
+            await logOut();
+            navigate('/');
+        } else {
+            console.error('Logout function is undefined');
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -59,35 +71,35 @@ const DashboardNavbar = () => {
                     </Box>
                 ))}
             </Box>
-            <Button
-                sx={{
-                    textTransform: 'capitalize',
-                }}
-            >
-                <Box
-                    sx={{
-                        color: '#FFF',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'start',
-                        alignItems: 'center',
-                        gap: '20px',
-                    }}
-                >
-                    <Box>
-                        <Avatar />
-                    </Box>
-                    <Box>Guest</Box>{' '}
                     <Button
                         sx={{
-                            display: 'flex',
+                            textTransform: 'capitalize',
                         }}
-                        onClick={() => navigate('/')}
                     >
-                        <MdLogout color='#FFF' />
+                        <Box
+                            sx={{
+                                color: '#FFF',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'start',
+                                alignItems: 'center',
+                                gap: '20px',
+                            }}
+                        >
+                            <Box>
+                                <Avatar src={user?.photoURL || ''}/>
+                            </Box>
+                            <Box>{user?.displayName}</Box>{' '}
+                            <Button
+                                sx={{
+                                    display: 'flex',
+                                }}
+                                onClick={handleLogout}
+                            >
+                                <MdLogout color='#FFF' />
+                            </Button>
+                        </Box>
                     </Button>
-                </Box>
-            </Button>
         </Box>
     );
 };
