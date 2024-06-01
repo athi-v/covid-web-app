@@ -2,30 +2,41 @@ import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { MdAnalytics, MdLogout } from 'react-icons/md';
 import { RiDashboardHorizontalFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext';
 
-const dashboardItem = [
-    {
-        id: '0',
-        title: 'Dashboard',
-        link: '/dashboard',
-        icon: <RiDashboardHorizontalFill />,
-    },
-    {
-        id: '1',
-        title: 'Statistics',
-        link: '/statistics',
-        icon: <MdAnalytics />,
-    },
-    {
-      id: '1',
-      title: 'Logout',
-      link: '/',
-      icon: <MdLogout />,
-  },
-];
 
 const MobileBottomNavbar = () => {
     const navigate = useNavigate();
+    const { logOut } = UserAuth() ?? {};
+
+    const handleLogout = async () => {
+        if (logOut) {
+            await logOut();
+            navigate('/');
+        } else {
+            console.error('Logout function is undefined');
+        }
+    };
+    const dashboardItem = [
+        {
+            id: '0',
+            title: 'Dashboard',
+            link: '/dashboard',
+            icon: <RiDashboardHorizontalFill />,
+        },
+        {
+            id: '1',
+            title: 'Statistics',
+            link: '/statistics',
+            icon: <MdAnalytics />,
+        },
+        {
+          id: '1',
+          title: 'Logout',
+          link: '',
+          icon: <MdLogout />,
+      },
+    ];
     return (
         <Paper
             sx={{
@@ -46,8 +57,13 @@ const MobileBottomNavbar = () => {
                         key={item.id}
                         label={item.title}
                         icon={item.icon}
-                        onClick={() => navigate(item.link)}
-                    />
+                        onClick={() => {
+                            if (item.title === 'Logout') {
+                                handleLogout();
+                            } else {
+                                navigate(item?.link);
+                            }
+                        }}                    />
                 ))}
             </BottomNavigation>
         </Paper>
