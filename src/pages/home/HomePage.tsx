@@ -8,14 +8,14 @@ import { useEffect } from 'react';
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const { logIn, user} = UserAuth() ?? {};
+    const { logIn, user } = UserAuth() ?? {};
 
     useEffect(() => {
-        if (user)  {
+        if (user) {
             navigate('/dashboard');
         }
-    }, [user, navigate]); 
-    
+    }, [user, navigate]);
+
     return (
         <PageLayout>
             <Box
@@ -72,24 +72,6 @@ const HomePage = () => {
                             mt: { xs: 5, lg: 10 },
                         }}
                     >
-                        {/* <Button
-                            size='small'
-                            variant='contained'
-                            sx={{
-                                textTransform: 'none',
-                                color: '#FFF',
-                                bgcolor: 'rgb(34 197 94)',
-                                width: { xs: '100%', lg: 'auto' },
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                            disableElevation
-                            onClick={() => navigate('/dashboard')}
-                            endIcon={<KeyboardArrowRight />}
-                        >
-                            Continue as Guest
-                        </Button> */}
                         <Button
                             size='small'
                             variant='outlined'
