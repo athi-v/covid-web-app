@@ -71,35 +71,35 @@ const DashboardNavbar = () => {
                     </Box>
                 ))}
             </Box>
+            <Button
+                sx={{
+                    textTransform: 'capitalize',
+                }}
+            >
+                <Box
+                    sx={{
+                        color: '#FFF',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'start',
+                        alignItems: 'center',
+                        gap: '20px',
+                    }}
+                >
+                    <Box>
+                        <Avatar src={user?.photoURL || ''} />
+                    </Box>
+                    <Box>{user?.displayName}</Box>{' '}
                     <Button
                         sx={{
-                            textTransform: 'capitalize',
+                            display: 'flex',
                         }}
+                        onClick={handleLogout}
                     >
-                        <Box
-                            sx={{
-                                color: '#FFF',
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'start',
-                                alignItems: 'center',
-                                gap: '20px',
-                            }}
-                        >
-                            <Box>
-                                <Avatar src={user?.photoURL || ''}/>
-                            </Box>
-                            <Box>{user?.displayName}</Box>{' '}
-                            <Button
-                                sx={{
-                                    display: 'flex',
-                                }}
-                                onClick={handleLogout}
-                            >
-                                <MdLogout color='#FFF' />
-                            </Button>
-                        </Box>
+                        <MdLogout color='#FFF' />
                     </Button>
+                </Box>
+            </Button>
         </Box>
     );
 };
