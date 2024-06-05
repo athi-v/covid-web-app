@@ -4,7 +4,6 @@ import { RiDashboardHorizontalFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext';
 
-
 const MobileBottomNavbar = () => {
     const navigate = useNavigate();
     const { logOut } = UserAuth() ?? {};
@@ -31,11 +30,11 @@ const MobileBottomNavbar = () => {
             icon: <MdAnalytics />,
         },
         {
-          id: '1',
-          title: 'Logout',
-          link: '',
-          icon: <MdLogout />,
-      },
+            id: '1',
+            title: 'Logout',
+            link: '',
+            icon: <MdLogout />,
+        },
     ];
     return (
         <Paper
@@ -63,7 +62,8 @@ const MobileBottomNavbar = () => {
                             } else {
                                 navigate(item?.link);
                             }
-                        }}                    />
+                        }}
+                    />
                 ))}
             </BottomNavigation>
         </Paper>

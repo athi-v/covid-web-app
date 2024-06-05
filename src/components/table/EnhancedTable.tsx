@@ -126,29 +126,41 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                 <TableCell padding='checkbox'>
                     <></>
                 </TableCell>
-                {headCells.map((headCell) => (
-                       !isMobile || (headCell.id !== 'recovered' && headCell.id !== 'cases' && headCell.id !== 'deaths') ? (
-                           <TableCell
-                               key={headCell.id}
-                               align={headCell.numeric ? 'right' : 'left'}
-                               padding={headCell.disablePadding ? 'none' : 'normal'}
-                               sortDirection={orderBy === headCell.id ? order : false}
-                           >
-                               <TableSortLabel
-                                   active={orderBy === headCell.id}
-                                   direction={orderBy === headCell.id ? order : 'asc'}
-                                   onClick={createSortHandler(headCell.id)}
-                               >
-                                   {headCell.label}
-                                   {orderBy === headCell.id ? (
-                                       <Box component='span' sx={visuallyHidden}>
-                                           {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                       </Box>
-                                   ) : null}
-                               </TableSortLabel>
-                           </TableCell>
-                       ) : null
-                   ))}            </TableRow>
+                {headCells.map((headCell) =>
+                    !isMobile ||
+                    (headCell.id !== 'recovered' &&
+                        headCell.id !== 'cases' &&
+                        headCell.id !== 'deaths') ? (
+                        <TableCell
+                            key={headCell.id}
+                            align={headCell.numeric ? 'right' : 'left'}
+                            padding={
+                                headCell.disablePadding ? 'none' : 'normal'
+                            }
+                            sortDirection={
+                                orderBy === headCell.id ? order : false
+                            }
+                        >
+                            <TableSortLabel
+                                active={orderBy === headCell.id}
+                                direction={
+                                    orderBy === headCell.id ? order : 'asc'
+                                }
+                                onClick={createSortHandler(headCell.id)}
+                            >
+                                {headCell.label}
+                                {orderBy === headCell.id ? (
+                                    <Box component='span' sx={visuallyHidden}>
+                                        {order === 'desc'
+                                            ? 'sorted descending'
+                                            : 'sorted ascending'}
+                                    </Box>
+                                ) : null}
+                            </TableSortLabel>
+                        </TableCell>
+                    ) : null
+                )}{' '}
+            </TableRow>
         </TableHead>
     );
 }
@@ -240,19 +252,23 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
         [order, orderBy, page, rowsPerPage, data]
     );
     const isMobile = useMediaQuery('(max-width:600px)');
-    
+
     return (
         <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2, borderRadius: '0' }} elevation={0}>
+            <Paper
+                sx={{ width: '100%', mb: 2, borderRadius: '0' }}
+                elevation={0}
+            >
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
-                     <Table
-                        sx={{ minWidth: {xs: '100%', lg: 750}, 
-                    minHeight: {xs: '50vh', lg: 'auto'} }}
+                    <Table
+                        sx={{
+                            minWidth: { xs: '100%', lg: 750 },
+                            minHeight: { xs: '50vh', lg: 'auto' },
+                        }}
                         aria-labelledby='tableTitle'
                     >
                         <EnhancedTableHead
-
                             data={data}
                             numSelected={selected.length}
                             order={order}
@@ -287,26 +303,24 @@ export default function EnhancedTable({ data }: EnhancedTableProps) {
                                         >
                                             {row.country}
                                         </TableCell>
-                                        {!isMobile &&
-                                        <>                                       
-                                         <TableCell align='right'>
-                                            {row.recovered}
-                                        </TableCell>
-                                        <TableCell align='right'>
-                                            {row.cases}
-                                        </TableCell>
-                                        <TableCell align='right'>
-                                            {row.deaths}
-                                        </TableCell>
-                                        </>
-
-                            }
+                                        {!isMobile && (
+                                            <>
+                                                <TableCell align='right'>
+                                                    {row.recovered}
+                                                </TableCell>
+                                                <TableCell align='right'>
+                                                    {row.cases}
+                                                </TableCell>
+                                                <TableCell align='right'>
+                                                    {row.deaths}
+                                                </TableCell>
+                                            </>
+                                        )}
                                     </TableRow>
                                 );
                             })}
                             {emptyRows > 0 && (
-                                <TableRow
-                                >
+                                <TableRow>
                                     <TableCell colSpan={6} />
                                 </TableRow>
                             )}

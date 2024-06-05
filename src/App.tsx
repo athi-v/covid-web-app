@@ -1,27 +1,20 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AboutUs from './pages/aboutus/AboutUs';
 import HomePage from './pages/home/HomePage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Statistics from './pages/dashboard/Statistics';
-import Diagnostics from './pages/dashboard/Diagnostics';
 import CountryDetails from './pages/dashboard/CountryDetails';
 import { AuthContextProvider } from './context/AuthContext';
 import { ProtectedRoute } from './provider/ProtectedRoute';
+import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
     return (
         <AuthContextProvider>
             <Router>
                 <Routes>
-                    <Route path='/' element={<HomePage />} />
-                    <Route
-                        path='/about-us'
-                        element={
-                            <ProtectedRoute>
-                                <AboutUs />
-                            </ProtectedRoute>
-                        }
-                    />
+                <Route path='/' element={<HomePage />} />
+                <Route path='*' element={<ErrorPage />} />
+
                     <Route
                         path='/dashboard'
                         element={
@@ -39,16 +32,12 @@ function App() {
                         }
                     />
                     <Route
-                        path='/diagnostics'
+                        path='/statistics/:country_id'
                         element={
                             <ProtectedRoute>
-                                <Diagnostics />
+                                <CountryDetails />
                             </ProtectedRoute>
                         }
-                    />
-                    <Route
-                        path='/statistics/:country_id'
-                        element={<CountryDetails />}
                     />
                 </Routes>
             </Router>
