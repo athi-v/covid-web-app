@@ -11,18 +11,18 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <Container maxWidth={false} disableGutters>
             <CssBaseline />
             <Grid container>
-                <Grid item lg={2}>
+                <Grid item lg={3} xl={2}>
                     <DashboardNavbar />
                 </Grid>
                 <Grid
                     item
-                    lg={10}
+                    lg={9} xl={10}
                     p={{ xs: '20px 20px 50px 20px', lg: '20px' }}
                 >
                     {children}
                 </Grid>
             </Grid>
-            <Grid item lg={12}>
+            <Grid item lg={10}>
                 <MobileBottomNavbar />
             </Grid>
         </Container>
