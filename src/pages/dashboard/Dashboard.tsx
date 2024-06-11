@@ -25,7 +25,7 @@ const Dashboard = () => {
         {
             id: '0',
             title: 'Test Conducted',
-            total: Number(covidData?.updated),
+            total: Number(covidData?.tests),
             icon: <TbTestPipe size={'25'} />,
         },
         {
